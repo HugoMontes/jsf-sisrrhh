@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:dataTable id="empleadoTable" var="empleado" value="#{empleadoController.empleados}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{empleado.id}" />
+                </p:column>
+
+                <p:column headerText="NOMBRE">
+                    <h:outputText value="#{empleado.nombres}" />
+                </p:column>
+
+                <p:column headerText="APELLIDO">
+                    <h:outputText value="#{empleado.apellidos}" />
+                </p:column>
+
+                <p:column headerText="FECHA NACIMIENTO">
+                    <h:outputText value="#{empleado.fechaNac}" />
+                </p:column>
+
+                <p:column headerText="SUELDO">
+                    <h:outputText value="#{empleado.sueldo}" />
+                </p:column>
+            </p:dataTable>
+
+            <p:panel header="Export PDF and Excel">  
+                <p:commandLink id="pdf" ajax="false">  
+                    <p:graphicImage value="/resources/images/pdf.png" />  
+                    <f:setPropertyActionListener value="false" target="#{exporterController.customExporter}" />  
+                    <pe:exporter type="pdf" target="empleadoTable" fileName="MessagesAndDetails" datasetPadding="4" />  
+                </p:commandLink>  
+
+                <p:spacer width="20" />  
+
+                <p:commandLink id="xls" ajax="false">  
+                    <p:graphicImage value="/resources/images/excel.png" />  
+                    <f:setPropertyActionListener value="false" target="#{exporterController.customExporter}" />  
+                    <pe:exporter type="xlsx" target="empleadoTable" fileName="MessagesAndDetails" datasetPadding="4" />  
+
+                </p:commandLink>  
+
+            </p:panel>  
+        </h:form>
+    </h:body>
+</html>
+
